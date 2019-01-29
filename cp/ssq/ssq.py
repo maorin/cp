@@ -216,7 +216,7 @@ class SSQ():
     def run(self, n):
         
         global_start_time = time.time()
-        epochs  = 1
+        epochs  = 20
         seq_len = 24
         
         X_train, y_train, last_data= self.load_data('ssq.txt' , seq_len, True, n)
@@ -246,7 +246,7 @@ class SSQ():
         pyplot.legend()
         pyplot.show()
         """
-        
+        print("best: %s" % history.best_score_)
         print("loss: %s" % history.history['loss'])
         print("val_loss: %s"  % history.history['val_loss'])    
         """
@@ -303,7 +303,7 @@ class SSQ():
         #print "Training duration (s) : %s  %s" % (time.time() - global_start_time)
 
 if __name__=='__main__':
-    fetch_ssq()
+    #fetch_ssq()
     
     #DLT().run(0)
     result = []

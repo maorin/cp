@@ -333,7 +333,7 @@ class SSQ():
 if __name__=='__main__':
     #fetch_ssq()
     
-    SSQ().tuning_param(0)
+    SSQ().tuning_param(6)
     
     """
     result = []
