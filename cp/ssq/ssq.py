@@ -112,6 +112,7 @@ class SSQ():
             restore_normalise_data.append(restore_normalise_window)
         return restore_normalise_data
 
+    
     def build_model(self, layers):
         model = Sequential()
     
@@ -119,8 +120,34 @@ class SSQ():
             input_shape=(layers[1], layers[0]),
             output_dim=layers[1],
             return_sequences=True))
+        model.add(Dropout(0.1))
+
+        model.add(LSTM(
+            layers[2],
+            return_sequences=False))
+        model.add(Dropout(0.1))
+            
+        model.add(Dense(
+            output_dim=layers[3]))
+        model.add(Activation("linear"))
+        #model.add(Activation("softmax"))
+    
+        start = time.time()
+        model.compile(loss="mse", optimizer="rmsprop")
+        #model.compile(loss='mean_squared_error', optimizer='adam')
+        #model.compile(loss="mse", optimizer=RMSprop(lr=0.003, rho=0.9, epsilon=1e-06))
+        print("> Compilation Time : ", time.time() - start)
+        return model
+
+    def build_model_old(self, layers):
+        model = Sequential()
+    
+        model.add(LSTM(
+            input_shape=(layers[1], layers[0]),
+            output_dim=layers[1],
+            return_sequences=True))
         model.add(Dropout(0.2))
-        """
+        
         model.add(LSTM(
             layers[2],
             return_sequences=True))
@@ -138,13 +165,14 @@ class SSQ():
     
         model.add(Dense(
             output_dim=layers[3]))
-        #model.add(Activation("linear"))
+        """
+        model.add(Activation("linear"))
         #model.add(Activation("softmax"))
-        model.add(Activation("relu"))
+        #model.add(Activation("relu"))
     
         start = time.time()
-        #model.compile(loss="mse", optimizer="rmsprop")
-        model.compile(loss="mse", optimizer=Adadelta(lr=0.003, rho=0.9, epsilon=1e-06))
+        model.compile(loss="mse", optimizer="rmsprop")
+        #model.compile(loss="mse", optimizer=Adadelta(lr=0.003, rho=0.9, epsilon=1e-06))
         print("> Compilation Time : ", time.time() - start)
         return model
 
@@ -216,8 +244,8 @@ class SSQ():
     def run(self, n):
         
         global_start_time = time.time()
-        epochs  = 20
-        seq_len = 24
+        epochs  = 1
+        seq_len = 50
         
         X_train, y_train, last_data= self.load_data('ssq.txt' , seq_len, True, n)
         print last_data
@@ -246,7 +274,7 @@ class SSQ():
         pyplot.legend()
         pyplot.show()
         """
-        print("best: %s" % history.best_score_)
+        #print("best: %s" % history.best_score_)
         print("loss: %s" % history.history['loss'])
         print("val_loss: %s"  % history.history['val_loss'])    
         """
@@ -277,7 +305,7 @@ class SSQ():
         #test_tran = test_tran[newaxis,:]
         #test_tran = test_tran[:,:,newaxis]
         
-        result = model.predict([test_tran])
+        result = model.predict(np.array(test_tran))
         print result[0][0]
         #return  self.restore_normalise_windows(result)[0][0]
         

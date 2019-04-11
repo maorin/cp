@@ -206,5 +206,5 @@ def main():
     #print "Training duration (s) : %s  %s" % (time.time() - global_start_time)
 
 if __name__=='__main__':
-    #fetch_ssq()
+    fetch_ssq()
     main()

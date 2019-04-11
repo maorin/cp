@@ -114,7 +114,7 @@ class SSQ():
             restore_normalise_data.append(restore_normalise_window)
         return restore_normalise_data
 
-    def build_model(self, layers=[1, 24, 100, 1]):
+    def build_model(self, layers=[1, 50, 100, 1]):
         model = Sequential()
     
         model.add(LSTM(
@@ -140,9 +140,9 @@ class SSQ():
     
         model.add(Dense(
             output_dim=layers[3]))
-        #model.add(Activation("linear"))
+        model.add(Activation("linear"))
         #model.add(Activation("softmax"))
-        model.add(Activation("relu"))
+        #model.add(Activation("relu"))
     
         start = time.time()
         model.compile(loss="mse", optimizer="rmsprop", metrics=["accuracy"])
@@ -219,7 +219,7 @@ class SSQ():
         
         global_start_time = time.time()
         epochs  = 20
-        seq_len = 24
+        seq_len = 50
         
         X_train, y_train, last_data= self.load_data('ssq.txt' , seq_len, True, n)
         print last_data
@@ -308,7 +308,7 @@ class SSQ():
         
         global_start_time = time.time()
         epochs  = 20
-        seq_len = 24
+        seq_len = 50
         
         X_train, y_train, last_data= self.load_data('ssq.txt' , seq_len, True, n)
         print last_data

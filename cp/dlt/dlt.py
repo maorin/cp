@@ -277,13 +277,13 @@ class DLT():
         model.load_weights("ssq.sh")
         """
         
-        flag = random.randint(1, 1000)
+        #flag = random.randint(1, 1000)
         flag = -2
         test_tran = [X_train[flag]]
         #test_tran = test_tran[newaxis,:]
         #test_tran = test_tran[:,:,newaxis]
-        
-        result = model.predict([test_tran])
+        print test_tran
+        result = model.predict(np.array(test_tran))
         print result[0][0]
         print last_data
         self.normalise_windows([last_data])
@@ -307,7 +307,7 @@ class DLT():
 
 
 if __name__=='__main__':
-    fetch_all()
+    #fetch_all()
     DLT().start()
     
         
