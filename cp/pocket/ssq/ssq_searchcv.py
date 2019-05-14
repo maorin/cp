@@ -24,7 +24,8 @@ from keras.wrappers.scikit_learn import KerasClassifier
 import sys
 from matplotlib import pyplot
 
-from fetchssq import fetch_ssq
+from crawl import fetch_data
+
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 

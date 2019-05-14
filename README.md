@@ -1,31 +1,9 @@
-Best: 0.013640 using {'nb_epoch': 80, 'batch_size': 10}
-0.002984 (0.001595) with: {'nb_epoch': 10, 'batch_size': 10}
-0.011935 (0.013303) with: {'nb_epoch': 20, 'batch_size': 10}
-0.005541 (0.005150) with: {'nb_epoch': 50, 'batch_size': 10}
-0.013640 (0.012102) with: {'nb_epoch': 80, 'batch_size': 10}
-0.002984 (0.001595) with: {'nb_epoch': 100, 'batch_size': 10}
-0.011083 (0.005937) with: {'nb_epoch': 10, 'batch_size': 20}
-0.005115 (0.003132) with: {'nb_epoch': 20, 'batch_size': 20}
-0.004689 (0.003190) with: {'nb_epoch': 50, 'batch_size': 20}
-0.007246 (0.004347) with: {'nb_epoch': 80, 'batch_size': 20}
-0.011083 (0.005937) with: {'nb_epoch': 100, 'batch_size': 20}
-0.010656 (0.007334) with: {'nb_epoch': 10, 'batch_size': 30}
-0.002984 (0.002173) with: {'nb_epoch': 20, 'batch_size': 30}
-0.004689 (0.002628) with: {'nb_epoch': 50, 'batch_size': 30}
-0.004263 (0.002628) with: {'nb_epoch': 80, 'batch_size': 30}
-0.005541 (0.004708) with: {'nb_epoch': 100, 'batch_size': 30}
-0.008099 (0.003667) with: {'nb_epoch': 10, 'batch_size': 50}
-0.006394 (0.004785) with: {'nb_epoch': 20, 'batch_size': 50}
-0.003410 (0.001595) with: {'nb_epoch': 50, 'batch_size': 50}
-0.002984 (0.002173) with: {'nb_epoch': 80, 'batch_size': 50}
-0.008525 (0.003667) with: {'nb_epoch': 100, 'batch_size': 50}
-0.008951 (0.002762) with: {'nb_epoch': 10, 'batch_size': 80}
-0.007246 (0.003667) with: {'nb_epoch': 20, 'batch_size': 80}
-0.007246 (0.003953) with: {'nb_epoch': 50, 'batch_size': 80}
-0.006820 (0.001595) with: {'nb_epoch': 80, 'batch_size': 80}
-0.006820 (0.000603) with: {'nb_epoch': 100, 'batch_size': 80}
-0.005968 (0.001595) with: {'nb_epoch': 10, 'batch_size': 100}
-0.003836 (0.001044) with: {'nb_epoch': 20, 'batch_size': 100}
-0.003836 (0.001044) with: {'nb_epoch': 50, 'batch_size': 100}
-0.005115 (0.002762) with: {'nb_epoch': 80, 'batch_size': 100}
-0.004689 (0.002173) with: {'nb_epoch': 100, 'batch_size': 100}
+=======
+cp 彩票预测程序
+=======
+
+
+目前支持：
+双色球
+大乐透
+

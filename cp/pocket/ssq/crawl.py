@@ -93,27 +93,26 @@ class ssqclazz:
         self.lottery_date = tds[index].string
  
  
-def fetch_ssq():
+def fetch_data():
     file = io.open('ssq.txt', 'w', encoding='utf-8')
     localtime = time.localtime(time.time())
     lyear = localtime.tm_year
     ymin = 3  # 双色球03年上线
     ymax = lyear - 2000
-    print('===抓取数据开始===，200%s-20%s' % (ymin, ymax))
+    #print('===抓取数据开始===，200%s-20%s' % (ymin, ymax))
     for year in range(ymin, ymax + 1):
         start = '{0}001'.format(year)
         end = '{0}300'.format(year)
         trs = request_content(start, end)
-        for tr in trs[-1::-1]:
+        for tr in trs:
             ssqobj = ssqclazz()
             ssqobj.tr_tag(tr)
             objstr = ssqobj.__str__()
             print objstr
             file.write(unicode(objstr))
             file.write(unicode('\n'))
-            print(objstr)
+            #print(objstr)
         file.write(unicode('\n'))
-        print()
         time.sleep(3)
     file.close()
-    print('抓取完毕！！！')
+    #print('抓取完毕！！！')

@@ -1,0 +1,42 @@
+<aiml version="1.0">
+
+
+
+<category>
+<pattern>SEARCH FOR *</pattern>
+<template>
+<think><set name="search"><star/></set></think>
+Which search engine would you like to use? Baidu, Yahoo, Yahoo Auctions, or Ebay.
+</template>
+</category>
+
+<category>
+<pattern>BAIDU</pattern>
+<that>WHICH SEARCH ENGINE WOULD YOU LIKE TO USE *</that>
+<template>
+<srai>SEARCH BAIDU FOR <get name="search"/></srai>
+</template>
+</category>
+
+
+
+<category>
+<pattern>SEARCH BAIDU FOR *</pattern>
+<template>
+<system>python search_baidu.py <star /></system>
+ <srai>WEBDONE</srai>
+</template>
+</category>
+
+
+<category>
+<pattern>ssq</pattern>
+<template>
+<system>python pp.py ssq</system>
+ <srai>WEBDONE</srai>
+</template>
+</category>
+
+
+</aiml>
+

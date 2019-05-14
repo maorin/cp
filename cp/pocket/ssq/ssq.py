@@ -22,7 +22,7 @@ from keras.models import model_from_json
 import sys
 from matplotlib import pyplot
 
-from fetchssq import fetch_ssq
+from crawl import fetch_data
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -136,7 +136,7 @@ class SSQ():
         model.compile(loss="mse", optimizer="rmsprop")
         #model.compile(loss='mean_squared_error', optimizer='adam')
         #model.compile(loss="mse", optimizer=RMSprop(lr=0.003, rho=0.9, epsilon=1e-06))
-        print("> Compilation Time : ", time.time() - start)
+        #print("> Compilation Time : ", time.time() - start)
         return model
 
     def build_model_old(self, layers):
@@ -173,7 +173,7 @@ class SSQ():
         start = time.time()
         model.compile(loss="mse", optimizer="rmsprop")
         #model.compile(loss="mse", optimizer=Adadelta(lr=0.003, rho=0.9, epsilon=1e-06))
-        print("> Compilation Time : ", time.time() - start)
+        #print("> Compilation Time : ", time.time() - start)
         return model
 
     def get_backtest_data(self, btc):
@@ -203,7 +203,7 @@ class SSQ():
         
         new_data = []
         for i in data:
-            print i
+            #print i
             new_data.append(i)
         data = new_data[btc:]
         return data
@@ -248,9 +248,9 @@ class SSQ():
         seq_len = 50
         
         X_train, y_train, last_data= self.load_data('ssq.txt' , seq_len, True, n)
-        print last_data
+        #print last_data
         
-        print('> Data Loaded. Compiling... X_train len:%s' % len(X_train))
+        #print('> Data Loaded. Compiling... X_train len:%s' % len(X_train))
         if len(X_train) < 500:
             return None
         
@@ -275,8 +275,8 @@ class SSQ():
         pyplot.show()
         """
         #print("best: %s" % history.best_score_)
-        print("loss: %s" % history.history['loss'])
-        print("val_loss: %s"  % history.history['val_loss'])    
+        #print("loss: %s" % history.history['loss'])
+        #print("val_loss: %s"  % history.history['val_loss'])    
         """
         model.save_weights('ssq.h5')
         model_json = model.to_json()
@@ -306,16 +306,16 @@ class SSQ():
         #test_tran = test_tran[:,:,newaxis]
         
         result = model.predict(np.array(test_tran))
-        print result[0][0]
+        #print result[0][0]
         #return  self.restore_normalise_windows(result)[0][0]
         
         del model
         K.clear_session()
         
-        print last_data
+        #print last_data
         self.normalise_windows([last_data])
         ball = self.restore_normalise_windows(result)[0][0]
-        print ball
+        #print ball
         return  ball        
         
         
@@ -330,13 +330,29 @@ class SSQ():
     
         #print "Training duration (s) : %s  %s" % (time.time() - global_start_time)
 
-if __name__=='__main__':
-    fetch_ssq()
+
+
+def main():
+    import warnings
+    warnings.filterwarnings("ignore")
+
+
+    #fetch_ssq()
+    #fetch_data()
+
+    red = []
+    ssq = SSQ()
+    for i in range(6):
+        red.append(round(ssq.run(i)))
+    blue = round(ssq.run(6))
+    print "red: %s  blue: %s" % (red, blue)
     
-    #DLT().run(0)
-    result = []
-    for i in range(7):
-        result.append(round(SSQ().run(i)))
-    print result
+    
+
+if __name__=='__main__':
+    main()
+
+    
+
     
         
