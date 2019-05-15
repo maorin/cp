@@ -28,14 +28,18 @@ Which search engine would you like to use? Baidu, Yahoo, Yahoo Auctions, or Ebay
 </template>
 </category>
 
+<category><pattern>* 双 色 球</pattern><template><srai>SSQ</srai></template></category>
+<category><pattern>* 双 色 球 *</pattern><template><srai>SSQ</srai></template></category>
+<category><pattern>双 色 球 *</pattern><template><srai>SSQ</srai></template></category>
+
 
 <category>
-<pattern>ssq</pattern>
+<pattern>SSQ</pattern>
 <template>
 <system>python pp.py ssq</system>
- <srai>WEBDONE</srai>
 </template>
 </category>
+
 
 
 </aiml>

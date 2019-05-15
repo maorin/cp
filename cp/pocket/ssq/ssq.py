@@ -265,6 +265,7 @@ class SSQ():
             y_train,
             batch_size=512,
             nb_epoch=epochs,
+            verbose=0,
             validation_split=0.02)
         
         
@@ -337,7 +338,6 @@ def main():
     warnings.filterwarnings("ignore")
 
 
-    #fetch_ssq()
     #fetch_data()
 
     red = []
@@ -345,7 +345,7 @@ def main():
     for i in range(6):
         red.append(round(ssq.run(i)))
     blue = round(ssq.run(6))
-    print "red: %s  blue: %s" % (red, blue)
+    print "predict next === red: %s  blue: %s" % (red, blue)
     
     
 
