@@ -4,12 +4,12 @@
     <pattern>INIT</pattern>
     <template>
       <think>
-        <set name="botname">@xdtuxbot</set>
-        <set name="master">@bigeagle_xd</set>
-        <set name="orgnization">西电开源社区</set>
+        <set name="botname">京城</set>
+        <set name="master">@maorin</set>
+        <set name="orgnization">北漂</set>
         <set name="gender">男生</set>
-        <set name="from_city">西安</set>
-        <set name="os">Linux</set>
+        <set name="from_city">北京</set>
+        <set name="os">Mac os</set>
       </think>
     </template>
   </category>

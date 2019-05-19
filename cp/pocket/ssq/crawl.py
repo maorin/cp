@@ -104,7 +104,7 @@ def fetch_data():
         start = '{0}001'.format(year)
         end = '{0}300'.format(year)
         trs = request_content(start, end)
-        for tr in trs:
+        for tr in trs[-1::-1]:
             ssqobj = ssqclazz()
             ssqobj.tr_tag(tr)
             objstr = ssqobj.__str__()

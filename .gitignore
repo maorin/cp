@@ -1,2 +1,6 @@
 *.pyc
 *.txt
+*.gitignore
+*.csv
+*.npy
+*.h5

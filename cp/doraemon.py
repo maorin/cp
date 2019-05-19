@@ -2,6 +2,7 @@
 import aiml
 import os
 import readline
+from pocket.stock import stock
 
 histfile = os.path.join(os.path.expanduser("~"), ".pyhist")
 try:
@@ -37,7 +38,8 @@ while True:
         bot_response = kernel.respond(message)
         #TODO 产生新的xml
         
-        
+        if stock.is_stock(message):
+            bot_response = "%s%s" % (bot_response, stock.perdict(message))
         
         
         

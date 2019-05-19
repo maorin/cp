@@ -1,0 +1,16 @@
+<aiml version="1.0">
+
+<category><pattern>* 股 票</pattern><template><srai>SSQ</srai></template></category>
+<category><pattern>* 股 票 *</pattern><template><srai>SSQ</srai></template></category>
+<category><pattern>股 票 *</pattern><template><srai>SSQ</srai></template></category>
+
+
+<category>
+<pattern>STOCK</pattern>
+<template>
+<system>python pp.py stock</system>
+</template>
+</category>
+
+</aiml>
+
