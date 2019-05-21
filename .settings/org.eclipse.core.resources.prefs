@@ -6,6 +6,7 @@ encoding//cp/pocket/ssq/crawl.py=utf-8
 encoding//cp/pocket/ssq/ssq.py=utf-8
 encoding//cp/pocket/ssq/ssq_bak.py=utf-8
 encoding//cp/pocket/ssq/ssq_searchcv.py=utf-8
+encoding//cp/pocket/stock/fetch_all_info.py=utf-8
 encoding//cp/pocket/stock/fetch_one.py=utf-8
 encoding//cp/pocket/stock/predicted_next_day.py=utf-8
 encoding//cp/pp.py=utf-8

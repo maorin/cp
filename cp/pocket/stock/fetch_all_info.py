@@ -16,7 +16,9 @@ volume 成交量
 
 """
 
-
+pd.set_option('display.width', 100000)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
 
 
     
@@ -30,7 +32,9 @@ def init_dl(context):
     
     logger.info("RunInfo: {}".format(context.run_info))
     df = (all_instruments('CS'))
-    context.all = df["order_book_id"]
+    print df
+    df.to_csv ("df.csv",encoding="utf-8")
+    context.all = df["abbrev_symbol","order_book_id","symbol"]
     
 # before_trading此函数会在每天策略交易开始前被调用，当天只会被调用一次
 def before_trading_dl(context):
@@ -40,37 +44,7 @@ def before_trading_dl(context):
 def handle_bar_dl(context, bar_dict):
     logger.info("每一个Bar执行")
     logger.info("打印Bar数据：")
-    
 
-    order_book_id = bar_dict[context.s1].order_book_id
-    history_close = history_bars(order_book_id, 10000, '1d', 'close')
-    #print history_close
-    """
-    info = "%s id: %s close: %s" % (bar_dict[s1].symbol,bar_dict[s1].order_book_id, bar_dict[s1].close)
-    logger.info(info)
-    name = bar_dict[s1].symbol
-    id = bar_dict[s1].order_book_id
-    close_price = bar_dict[s1].close
-    volume = bar_dict[s1].volume
-    today = bar_dict[s1].datetime
-    """
-
-    context.all_close_price[order_book_id] = history_close
-    
-    if os.path.exists("close_price"):
-        shutil.rmtree("close_price")
-    os.mkdir("close_price")
-    
-    #if not os.path.exists("close_price"):
-
-    for book_id, data in context.all_close_price.items():
-        print book_id
-        print data
-        np.save("close_price/%s" % book_id, data)
-        #df = pd.DataFrame(data)
-        #df.save("close_price/%s" % book_id,  encoding = "utf-8")   
-   
-        
 # after_trading函数会在每天交易结束后被调用，当天只会被调用一次
 def after_trading_dl(context):
     logger.info("收盘后执行after_trading函数")
@@ -78,9 +52,7 @@ def after_trading_dl(context):
 
 def end_dl(context):
     logger.info("用户程序执行完成")
-    for book_id, data in context.all_close_price.items():
-        df = pd.DataFrame(data)
-        df.to_csv("close_price/%s" % book_id,  encoding = "utf-8")
+
 
 before_yesterday = (datetime.date.today() -  datetime.timedelta(days=6)).strftime("%Y-%m-%d")
 yesterday = (datetime.date.today() -  datetime.timedelta(days=3)).strftime("%Y-%m-%d")
@@ -89,9 +61,9 @@ print before_yesterday
 print yesterday
 
 
-def get(id):
+def run(id):
     config_dl = {
-      "stock_id":"%s" % id,
+      "stock_id":"%s.XSHG" % id,
       "base": {
         "start_date": yesterday,
         "end_date": today,
@@ -114,4 +86,4 @@ def get(id):
     run_func(init=init_dl, before_trading=before_trading_dl, handle_bar=handle_bar_dl, end=end_dl, config=config_dl)
     
 if __name__=='__main__':
-    get("002895.XSHE")
+    run("600446")

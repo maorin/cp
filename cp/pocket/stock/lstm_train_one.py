@@ -119,7 +119,7 @@ def train_single_stock(stockid, result, today):
     epochs  = 1
     seq_len = 50
     
-    filename = "%s.XSHG.npy" % stockid
+    filename = "%s.npy" % stockid
     
     print filename
     data = np.load('close_price/%s' % ( filename))
@@ -131,8 +131,8 @@ def train_single_stock(stockid, result, today):
     X_train, y_train = load_data('close_price/%s' % (filename), seq_len, True)
     
     print('> Data Loaded. Compiling... X_train len:%s' % len(X_train))
-    if len(X_train) < 500:
-        return None
+    #if len(X_train) < 500:
+    #    return None
     
     try:
         model = build_model([1, seq_len, 100, 1])
@@ -289,4 +289,4 @@ def main(stockid):
     """
     
 if __name__=='__main__':
-    main("000001")
+    main("002895.XSHE")

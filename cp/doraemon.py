@@ -39,7 +39,8 @@ while True:
         #TODO 产生新的xml
         
         if stock.is_stock(message):
-            bot_response = "%s%s" % (bot_response, stock.perdict(message))
+            stockid = stock.get_stock_id(message)
+            bot_response = "%s%s" % (bot_response, stock.perdict(stockid))
         
         
         

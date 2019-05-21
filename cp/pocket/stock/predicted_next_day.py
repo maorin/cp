@@ -234,7 +234,7 @@ print today
 
 def main(id):
     config_next_day = {
-      "stock_id":"%s.XSHG" % id,
+      "stock_id":"%s" % id,
       "predicted_one":predicted_one,
       "base": {
         "start_date": yesterday,

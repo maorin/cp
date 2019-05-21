@@ -338,7 +338,7 @@ def main():
     warnings.filterwarnings("ignore")
 
 
-    #fetch_data()
+    fetch_data()
 
     red = []
     ssq = SSQ()
