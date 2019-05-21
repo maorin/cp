@@ -5,6 +5,7 @@ Created on May 15, 2019
 '''
 import fetch_one
 import lstm_train_one
+import predicted_next_day
 
 def main():
     print "enter stock main"
@@ -16,7 +17,7 @@ def perdict(stockid):
     #train
     lstm_train_one.main(stockid)
     #perdict
-    
+    predicted_next_day.main(stockid)
     
     
     

@@ -83,7 +83,7 @@ def end_dl(context):
         df.to_csv("close_price/%s" % book_id,  encoding = "utf-8")
 
 before_yesterday = (datetime.date.today() -  datetime.timedelta(days=6)).strftime("%Y-%m-%d")
-yesterday = (datetime.date.today() -  datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+yesterday = (datetime.date.today() -  datetime.timedelta(days=3)).strftime("%Y-%m-%d")
 today = datetime.date.today().strftime("%Y-%m-%d")
 print before_yesterday
 print yesterday
@@ -91,7 +91,7 @@ print yesterday
 
 def get(id):
     config_dl = {
-      "stock_id":"%s.XSHE" % id,
+      "stock_id":"%s.XSHG" % id,
       "base": {
         "start_date": yesterday,
         "end_date": today,
@@ -114,4 +114,4 @@ def get(id):
     run_func(init=init_dl, before_trading=before_trading_dl, handle_bar=handle_bar_dl, end=end_dl, config=config_dl)
     
 if __name__=='__main__':
-    get("000001")
+    get("600446")

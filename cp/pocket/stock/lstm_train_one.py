@@ -114,10 +114,12 @@ def build_model(layers):
     return model
 
 
-def train_single_stock(filename, result, today):
+def train_single_stock(stockid, result, today):
     global_start_time = time.time()
     epochs  = 1
     seq_len = 50
+    
+    filename = "%s.XSHG.npy" % stockid
     
     print filename
     data = np.load('close_price/%s' % ( filename))
@@ -249,7 +251,7 @@ def get_all_order_book_id(today):
     return all_order_book_id
 
 
-def main():
+def main(stockid):
     
     if len(sys.argv) == 2:
         today = sys.argv[1]
@@ -257,8 +259,8 @@ def main():
         today = datetime.date.today().strftime("%Y%m%d")
     
     
-    train_all  = 1
-    
+    train_all  = 0
+    result = {}
     if train_all:
         all_stock_id = get_all_order_book_id(today)
         print all_stock_id
@@ -278,8 +280,7 @@ def main():
         yesterday = datetime.date.today().strftime("%Y-%m-%d")
         df.to_csv ("train_result%s.csv" % (yesterday), encoding = "utf-8")
     else:
-        stock_id = "300028.XSHE.npy"
-        train_single_stock(stock_id, result, today)
+        train_single_stock(stockid, result, today)
     
     
     """
@@ -288,4 +289,4 @@ def main():
     """
     
 if __name__=='__main__':
-    main()
+    main("000001")
