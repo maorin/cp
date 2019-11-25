@@ -1,10 +1,23 @@
 =======
-cp 彩票 股票预测机器人
+机器猫
 =======
 
+询问双色球: 输入ssq
+大乐透: 输入 dlt
 
-目前支持：
-双色球
-大乐透
+询问股票: 输入股票代码
 
-上证 深证
+
+==
+run
+==
+python doraemon.py
+
+股票数据更新
+rqalpha update-bundle
+
+
+==
+依赖
+==
+rqalpha
