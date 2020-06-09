@@ -27,7 +27,8 @@ def load_data(filename, seq_len, normalise_window):
     f = open(filename, 'rb').read()
     data = f.decode().split('\n')
     """
-    data = np.load(filename)
+    df = pd.read_csv('%s' % ( filename))
+    data = df["close"]
     data = [x for x in data if str(x) != 'nan']
     sequence_length = seq_len + 1
     result = []
@@ -119,16 +120,17 @@ def train_single_stock(stockid, result, today):
     epochs  = 1
     seq_len = 50
     
-    filename = "%s.npy" % stockid
+    filename = "%s.csv" % stockid
     
-    print filename
-    data = np.load('close_price/%s' % ( filename))
-    print len(data)
+    print(filename)
+    df = pd.read_csv('data/%s' % ( filename))
+    data = df["close"]
+    print(len(data))
     if len(data) < 100:
         return False    
     
     
-    X_train, y_train = load_data('close_price/%s' % (filename), seq_len, True)
+    X_train, y_train = load_data('data/%s' % (filename), seq_len, True)
     
     print('> Data Loaded. Compiling... X_train len:%s' % len(X_train))
     #if len(X_train) < 500:
@@ -137,7 +139,7 @@ def train_single_stock(stockid, result, today):
     try:
         model = build_model([1, seq_len, 100, 1])
     except Exception as e:
-        print traceback.format_exc()
+        print(traceback.format_exc())
     
     history = model.fit(
         X_train,
@@ -177,16 +179,16 @@ def train_single_stock(stockid, result, today):
     model.save('model/%s.h5' %  filename[:-4]) 
     model.reset_states()
     """
-    print "Training duration (s) : %s  %s" % (time.time() - global_start_time, filename)
+    print("Training duration (s) : %s  %s" % (time.time() - global_start_time, filename))
 
 def train_single_stock_test(filename, result):
     global_start_time = time.time()
     epochs  = 1
     seq_len = 50
     
-    print filename
+    print(filename)
     data = np.load('close_price/%s' %  filename)
-    print len(data)
+    print(len(data))
     if len(data) < 100:
         return False    
     
@@ -200,7 +202,7 @@ def train_single_stock_test(filename, result):
     try:
         model = build_model([1, seq_len, 100, 1])
     except Exception as e:
-        print traceback.format_exc()
+        print(traceback.format_exc())
     
     history = model.fit(
         X_train,
@@ -240,7 +242,7 @@ def train_single_stock_test(filename, result):
     model.save('model/%s.h5' %  filename[:-4]) 
     model.reset_states()
     """
-    print "Training duration (s) : %s  %s" % (time.time() - global_start_time, filename)
+    print("Training duration (s) : %s  %s" % (time.time() - global_start_time, filename))
 
 def get_all_order_book_id(today):
     all_order_book_id = []
@@ -263,7 +265,7 @@ def main(stockid):
     result = {}
     if train_all:
         all_stock_id = get_all_order_book_id(today)
-        print all_stock_id
+        print(all_stock_id)
         #pool = multiprocessing.Pool(processes=2)
         result = {}
         for stock_id in all_stock_id:
@@ -274,9 +276,9 @@ def main(stockid):
                 #pool.apply_async(train_single_stock, (stock_id,))
                 #tpool.execute(train_single_stock, stock_id)
     
-        print result
+        print(result)
         df = pd.DataFrame(pd.DataFrame(result).to_dict("index"))
-        print df
+        print(df)
         yesterday = datetime.date.today().strftime("%Y-%m-%d")
         df.to_csv ("train_result%s.csv" % (yesterday), encoding = "utf-8")
     else:
@@ -289,4 +291,4 @@ def main(stockid):
     """
     
 if __name__=='__main__':
-    main("002895.XSHE")
+    main("688466.SH")

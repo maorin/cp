@@ -18,7 +18,6 @@ volume 成交量
 
 
 
-
     
 # 在这个方法中编写任何的初始化逻辑。context对象将会在你的算法策略的任何方法之间做传递。
 def init_dl(context):
@@ -64,8 +63,8 @@ def handle_bar_dl(context, bar_dict):
     #if not os.path.exists("close_price"):
 
     for book_id, data in context.all_close_price.items():
-        print book_id
-        print data
+        print(book_id)
+        print(data)
         np.save("close_price/%s" % book_id, data)
         #df = pd.DataFrame(data)
         #df.save("close_price/%s" % book_id,  encoding = "utf-8")   
@@ -85,8 +84,8 @@ def end_dl(context):
 before_yesterday = (datetime.date.today() -  datetime.timedelta(days=6)).strftime("%Y-%m-%d")
 yesterday = (datetime.date.today() -  datetime.timedelta(days=3)).strftime("%Y-%m-%d")
 today = datetime.date.today().strftime("%Y-%m-%d")
-print before_yesterday
-print yesterday
+print(before_yesterday)
+print(yesterday)
 
 
 def get(id):

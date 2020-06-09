@@ -29,7 +29,7 @@ del os, histfile
 
 # kernel now ready for use
 while True:
-    message = raw_input("send message to doraemon: ")
+    message = input("send message to doraemon: ")
     if message == "quit":
         exit()
     elif message == "save":
@@ -44,4 +44,4 @@ while True:
         
         
         
-        print bot_response
+        print(bot_response)
