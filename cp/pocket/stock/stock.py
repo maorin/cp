@@ -16,12 +16,12 @@ def perdict(stockid):
     #train
     lstm_train_one.main(stockid)
     #perdict
-    predicted_next_day.main(stockid)
+    result = predicted_next_day.main(stockid)
     
     
     
     
-    return "perdict stockid %s" % stockid
+    return result
 
 
 def is_stock(message):

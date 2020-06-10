@@ -3,6 +3,7 @@ import tushare as ts
 import os
 import pandas as pd
 import datetime
+import time
  
 
 def get_stock_basic(pro):
@@ -17,7 +18,7 @@ def get_stock_basic(pro):
     return df
 
 def update_data(ts, file_name, now_code,  end_date):
-    
+    print(now_code)
     df = pd.read_csv(file_name)
     head_1 = df.head(1)
     print(head_1)
@@ -30,9 +31,13 @@ def update_data(ts, file_name, now_code,  end_date):
     start_date = (old_end + delta)
     
     start_date_str = start_date.strftime('%Y%m%d')
-    if end >= start_date:
+    if end > start_date:
+        print(start_date)
+        print(end)
+        
         newdf = ts.pro_bar(ts_code=now_code, start_date=start_date_str, end_date=end_date)
         print(newdf)
+        time.sleep(1)
         newdf = newdf.append(df)
         newdf.to_csv(file_name)
         print('已导出%s' % (now_code))

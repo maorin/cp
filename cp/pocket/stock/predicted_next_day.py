@@ -89,6 +89,9 @@ def handle_bar_next_day(id):
     print("predicted: %s yesterday_close:%s restore_predicted:%s real: %s" %  (predicted,yesterday_close, restore_predicted, y))
     filename =  "%s.npy.h5" % order_book_id
 
+    
+    
+    """"
     result[filename] = {"stock_id":order_book_id,
                         "normalised_yesterday_close":normalised_yesterday_close, 
                         "yesterday_close": yesterday_close, 
@@ -97,14 +100,21 @@ def handle_bar_next_day(id):
                         "inc": inc}
 
     print(result)
+    
     df = pd.DataFrame(pd.DataFrame(result).to_dict("index"))
     #print df
     today_str = datetime.date.today().strftime("%Y-%m-%d")
-    
-    
     df.to_csv ("predicted_result%s.csv" % (today_str), encoding="utf-8")
-
-
+    """
+    result = {"stock_id":order_book_id,
+              "normalised_yesterday_close":normalised_yesterday_close, 
+              "yesterday_close": yesterday_close, 
+              "predicted":predicted, 
+              "restore_predicted": restore_predicted, 
+              "inc": inc}    
+    
+    
+    return result
         
 
 
@@ -124,7 +134,7 @@ print(today)
 
 
 def main(id):
-    handle_bar_next_day(id)
+    return handle_bar_next_day(id)
 
 
 if __name__ == "__main__":

@@ -27,6 +27,8 @@ else:
 del os, histfile
 
 
+cmds = ["follow", "show", "predict"]
+
 # kernel now ready for use
 while True:
     message = input("send message to doraemon: ")
@@ -37,6 +39,14 @@ while True:
     else:
         bot_response = kernel.respond(message)
         #TODO 产生新的xml
+        
+        if message.split()[0] in cmds:
+            print(message)
+            module = "portfolio.core"
+            if len(message.split()) > 1:
+                getattr(getattr(__import__(module),"core"), message.split()[0])(message.split()[1])
+            else:
+                getattr(getattr(__import__(module),"core"), message.split()[0])()
         
         if stock.is_stock(message):
             stockid = stock.get_stock_id(message)
