@@ -38,6 +38,7 @@ def handle_bar_next_day(id):
     history_close = df["close"].values
     
     history_close = history_close[:50]
+    history_close = history_close[::-1]
     if len(history_close) != 50:
         print("history_close != 50 %s" % len(history_close))
         return "history_close != 5"

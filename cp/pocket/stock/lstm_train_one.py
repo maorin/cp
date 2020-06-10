@@ -29,6 +29,7 @@ def load_data(filename, seq_len, normalise_window):
     """
     df = pd.read_csv('%s' % ( filename))
     data = df["close"]
+    data = data[::-1]
     data = [x for x in data if str(x) != 'nan']
     sequence_length = seq_len + 1
     result = []
@@ -125,6 +126,7 @@ def train_single_stock(stockid, result, today):
     print(filename)
     df = pd.read_csv('data/%s' % ( filename))
     data = df["close"]
+    
     print(len(data))
     if len(data) < 100:
         return False    
