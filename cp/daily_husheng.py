@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import datetime
 import time
+from pocket.stock import stock
  
 
 def get_stock_basic(pro):
@@ -50,7 +51,33 @@ def update_data(ts, file_name, now_code,  end_date):
     
 
 def download_data(pro, ts, dd):
-    d_time = datetime.datetime.strptime(str(datetime.datetime.now().date())+'18:30', '%Y-%m-%d%H:%M')
+    d_time = datetime.datetime.strptime(str(datetime.datetime.now().date())+'17:30', '%Y-%m-%d%H:%M')
+    n_time = datetime.datetime.now()
+    
+    if n_time > d_time:
+        end_date = n_time.strftime("%Y%m%d")
+    
+    end_date = n_time.strftime("%Y%m%d")
+    
+    code_list = dd['ts_code'].values
+    print('code_list',code_list)
+    if os.path.isfile("follow.csv"):
+        df = pd.read_csv("follow.csv", dtype={'id':str})
+        data = []
+        for stock_id in df["id"]:    
+            now_code = stock.get_stock_id(stock_id)
+            file_name='./data/%s.csv'%(now_code)
+            if os.path.isfile(file_name):
+                update_data(ts, file_name, now_code,  end_date)
+            else:
+                #df = ts.pro_bar(ts_code=now_code, adj='qfq')
+                df = ts.pro_bar(ts_code=now_code, end_date=end_date)
+                df.to_csv(file_name)
+                print('已导出%s' % (now_code))
+
+
+def download_data_all(pro, ts, dd):
+    d_time = datetime.datetime.strptime(str(datetime.datetime.now().date())+'17:30', '%Y-%m-%d%H:%M')
     n_time = datetime.datetime.now()
     
     if n_time > d_time:
@@ -70,7 +97,6 @@ def download_data(pro, ts, dd):
             df = ts.pro_bar(ts_code=now_code, end_date=end_date)
             df.to_csv(file_name)
             print('已导出%s' % (now_code))
-
 
 if __name__ == "__main__":
     ts.set_token('9cc8a24ea3010f79fd55824b3e0c7ac8681ee84e85fb75097e558512')
