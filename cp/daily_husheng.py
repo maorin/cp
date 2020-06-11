@@ -99,7 +99,7 @@ def download_data_all(pro, ts, dd):
             print('已导出%s' % (now_code))
 
 if __name__ == "__main__":
-    ts.set_token('9cc8a24ea3010f79fd55824b3e0c7ac8681ee84e85fb75097e558512')
+    ts.set_token('xxxx')
     pro = ts.pro_api()
     
     dd = get_stock_basic(pro)
